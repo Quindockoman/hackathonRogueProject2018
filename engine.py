@@ -39,7 +39,7 @@ def render_all(mapToUse, con):
     for y in range(GAME_HEIGHT):
         for x in range(GAME_WIDTH):
             if(mapToUse.map[x][y].charToken != ""):
-                newCharCode = 7
+                newCharCode = 160 + 7
                 # print(mapToUse.map[x][y].charToken)
                 if(mapToUse.map[x][y].charToken == "S"):
                     newCharCode += 1
@@ -77,25 +77,27 @@ def render_all(mapToUse, con):
         placeX = roomIndex.x1
         placeY = roomIndex.y1
         for i in range(0, len(roomIndex.playerList)):
-            newCharCode = -1
+            newCharCode = 160
             if(roomIndex.playerList[i].playerNum == 0):
                 newCharCode += 1
             if(roomIndex.playerList[i].playerNum == 2):
-                newCharCode += 3
+                newCharCode += 2
             if(roomIndex.playerList[i].playerNum == 2):
-                newCharCode += 4
+                newCharCode += 3
             if(roomIndex.playerList[i].playerNum == 3):
-                newCharCode += 5
+                newCharCode += 4
             if(roomIndex.playerList[i].playerNum == 4):
-                newCharCode += 6
+                newCharCode += 5
             if(roomIndex.playerList[i].playerNum == 5):
-                newCharCode += 7
+                newCharCode += 6
             if(roomIndex.playerList[i].playerNum == 6):
-                newCharCode += 8
+                newCharCode += 7
             # print(roomIndex.playerList[i].playerNum)
             # print(roomIndex.playerList[i].name[0])
             # print(placeX+1, placeY+1)
-            tcod.console_put_char_ex(con, placeX+1, placeY+1, newCharCode, tcod.white, tcod.black)
+            #tcod.console_put_char_ex(con, placeX+1, placeY+1, chr(newCharCode), tcod.white, tcod.black)
+            tcod.console_put_char_ex(con, placeX+1, placeY+1, chr(newCharCode), tcod.white, tcod.black)
+
             if(placeX < roomIndex.x2-2):
                 placeX += 1
             else:
@@ -139,14 +141,13 @@ def handle_keys(currPlayer, mapToUse):
         fov_recompute = True
 
 
-
 def load_customfont():
     print("did not crash")
     #The index of the first custom tile in the file
-    a = 0
+    a = 160
 
     #The "y" is the row index, here we load the sixth row in the font file. Increase the "6" to load any new rows from the file
-    for y in range(6, 7):
+    for y in range(5, 6):
         tcod.console_map_ascii_codes_to_font(a, 32, 0, y)
         a += 32
 
@@ -155,7 +156,8 @@ def main():
     # player_y = int(screen_height / 2)
 
     # tcod.console_set_custom_font('arial10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
-    tcod.console_set_custom_font('hontfont.png', tcod.FONT_TYPE_GRAYSCALE | tcod.FONT_LAYOUT_TCOD, 32, 10)
+    # tcod.console_set_custom_font('hontfont.png', tcod.FONT_TYPE_GRAYSCALE | tcod.FONT_LAYOUT_TCOD, 32, 10)
+    tcod.console_set_custom_font('hontfont.png', tcod.FONT_LAYOUT_ASCII_INROW, 32, 9)
     load_customfont()
     print("here")
     tcod.console_init_root(GAME_WIDTH, GAME_HEIGHT, 'tcod tutorial revised', False)
