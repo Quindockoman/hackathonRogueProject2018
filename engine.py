@@ -17,7 +17,15 @@ with open('items.csv','r') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     for row in readCSV:
         itemList.append(row)
-print(itemList)
+# print(itemList)
+
+playerList = []
+# csv item reader
+with open('players.csv','r') as csvfile:
+    readCSV = csv.reader(csvfile, delimiter=',')
+    for row in readCSV:
+        playerList.append(row)
+# print(playerList)
 
 def render_all(mapToUse, con):
     global color_light_wall
@@ -34,6 +42,16 @@ def render_all(mapToUse, con):
                 # tcod.console_set_char_background(con, x, y, color_dark_ground, tcod.BKGND_SET)
                 if(mapToUse.map[x][y].charToken != ""):
                     tcod.console_put_char(con, x, y, mapToUse.map[x][y].charToken, tcod.BKGND_NONE)
+    for roomIndex in mapToUse.roomList:
+        # print("room " + roomIndex.roomName + " player list:")
+        # print(roomIndex.playerList)
+        # print()
+        placeX = roomIndex.x1
+        placeY = roomIndex.y1
+        for i in range(0, len(roomIndex.playerList)):
+            # print(roomIndex.playerList[i].name[0])
+            tcod.console_put_char(con, placeX, placeY, roomIndex.playerList[i].name[0], tcod.BKGND_NONE)
+
     # blit the contents of "con" to the root console
     tcod.console_blit(con, 0, 0, GAME_WIDTH, GAME_HEIGHT, 0, 0, 0)
 
@@ -51,20 +69,25 @@ def main():
 
     gameMap = Map(GAME_WIDTH, GAME_HEIGHT, 9)
     gameMap.make_map()
-    for i in range(0, len(gameMap.roomList)):
-        print(gameMap.roomList[i])
+    # for i in range(0, len(gameMap.roomList)):
+    #     print(gameMap.roomList[i])
 
     newItem = item(itemList[0])
     gameMap.insert_item(newItem, gameMap.roomList[0])
-    print(gameMap.roomList[0].itemList)
+    # print(gameMap.roomList[0].itemList)
 
-    
+    for i in range(0, len(gameMap.roomList)):
+        print(gameMap.roomList[i].playerList)
+    p1 = player(playerList[0])
+    gameMap.insert_player(p1, 0)
+    for i in range(0, len(gameMap.roomList)):
+        print(gameMap.roomList[i].playerList)
+
 
     while not tcod.console_is_window_closed():
-        # tcod.sys_check_for_event(tcod.EVENT_KEY_PRESS, key, mouse)
+        tcod.sys_check_for_event(tcod.EVENT_KEY_PRESS, key, mouse)
 
         tcod.console_set_default_foreground(0, tcod.white)
-        # tcod.console_put_char(0, player_x, player_y, '@', tcod.BKGND_NONE)
         render_all(gameMap, con)
 
         tcod.console_flush()
