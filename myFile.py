@@ -1,0 +1,3 @@
+
+myFunc():
+  print("it worked")

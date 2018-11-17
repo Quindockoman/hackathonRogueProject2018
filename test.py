@@ -1,0 +1,3 @@
+from myFile import *
+
+myFunc()
