@@ -3,7 +3,7 @@
 
 class player:
     # combat-related properties and methods (monster, player, NPC).
-    def __init__(self, speed, strength, knowledge, sanity, name, death_function=None):
+    def __init__(self, name, speed, strength, knowledge, sanity, death_function=None):
         self.name = name
         self.base_speed = speed
         self.base_strength = strength
