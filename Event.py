@@ -15,6 +15,7 @@ class event:
         self.omen = omen
 
     def activate(self):
+        self.activate_omen()
         if self.target == "all":
             self.target_all()
         if self.target == "player":
