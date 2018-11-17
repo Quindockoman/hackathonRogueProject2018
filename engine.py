@@ -9,8 +9,8 @@ from Event import *
 color_dark_wall = tcod.Color(0, 0, 100)
 color_dark_ground = tcod.Color(50, 50, 150)
 
-GAME_HEIGHT = 50
-GAME_WIDTH = 50
+GAME_HEIGHT = 16
+GAME_WIDTH = 16
 
 itemList = []
 # csv item reader
@@ -146,7 +146,7 @@ def load_customfont():
     a = 256
 
     #The "y" is the row index, here we load the sixth row in the font file. Increase the "6" to load any new rows from the file
-    for y in range(6,7):
+    for y in range(6, 7):
         tcod.console_map_ascii_codes_to_font(a, 32, 0, y)
         a += 32
 
@@ -158,7 +158,7 @@ def main():
     tcod.console_set_custom_font('hontfont.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD, 32, 10)
     # load_customfont()
     print("here")
-    tcod.console_init_root(GAME_WIDTH, GAME_HEIGHT, 'tcod tutorial revised', True)
+    tcod.console_init_root(GAME_WIDTH, GAME_HEIGHT, 'tcod tutorial revised', False)
     con = tcod.console_new(GAME_WIDTH, GAME_HEIGHT)
 
     key = tcod.Key()
