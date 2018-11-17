@@ -1,6 +1,8 @@
 import tcod
 import math
 
+roomNameList = ["library", "study", "crypt", "foyer", "kitchen", "dining hall", "master bedroom", "garden", "closet"]
+
 class Tile:
     blocked = False
     charToken = ""
@@ -9,29 +11,42 @@ class Tile:
         self.blocked = blocked
 
 class Room:
+    roomName = ""
+    playerList = []
+    itemList = []
     x1 = 0
     x2 = 0
     y1 = 0
     y2 = 0
     spdPenalty = 1
 
-    def __init__(self, x1, x2, y1, y2):
+    def __init__(self, x1, x2, y1, y2, nameOfRoom):
         self.x1 = x1
         self.x2 = x2
         self.y1 = y1
         self.y2 = y2
+        self.roomName = nameOfRoom
 
 class Map:
     maxHeight = 0
     maxWidth = 0
     numRooms = 0
     map = []
+    roomList = []
 
     def __init__(self, maxHeight, maxWidth, numRooms):
         self.maxHeight = maxHeight
         self.maxWidth = maxWidth
         self.numRooms = numRooms
 
+    def insert_player(newPlayer, room):
+        room.playerList.append(newPlayer)
+
+    def remove_player(playerToRemove, room):
+        room.playerList.append(playerToRemove)
+
+    def insert_item(newItem, room):
+        room.itemList.append(newItem)
 
     def create_room(self, room):
         # go through the tiles in the rectangle and make them passable
@@ -71,8 +86,9 @@ class Map:
         yEnd = 4
         for i in range(1, self.numRooms+1):
             print(xStart, xEnd, yStart, yEnd)
-            newRoom = Room(xStart, xEnd, yStart, yEnd)
+            newRoom = Room(xStart, xEnd, yStart, yEnd, roomNameList[i-1])
             self.create_room(newRoom)
+            self.roomList.append(newRoom)
             xStart += 4
             xEnd += 4
             if(i > 0 and i % math.sqrt(self.numRooms) == 0):

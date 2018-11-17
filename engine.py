@@ -1,4 +1,5 @@
 import tcod
+import csv
 from theMap import *
 from Item import *
 from Monster import *
@@ -9,6 +10,17 @@ color_dark_ground = tcod.Color(50, 50, 150)
 
 GAME_HEIGHT = 50
 GAME_WIDTH = 50
+
+itemList = []
+# csv item reader
+with open('items.csv','r') as csvfile:
+    readCSV = csv.reader(csvfile, delimiter=',')
+    for row in readCSV:
+        newItemList = []
+        for index in row:
+            newItemList.append(row[index])
+        itemList.append(newItemList)
+print(itemList)
 
 def render_all(mapToUse, con):
     global color_light_wall
@@ -42,6 +54,8 @@ def main():
 
     gameMap = Map(GAME_WIDTH, GAME_HEIGHT, 9)
     gameMap.make_map()
+    for i in range(0, len(gameMap.roomList)):
+        print(gameMap.roomList[i])
 
     while not tcod.console_is_window_closed():
         # tcod.sys_check_for_event(tcod.EVENT_KEY_PRESS, key, mouse)
