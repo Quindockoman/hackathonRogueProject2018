@@ -9,7 +9,17 @@ class player:
         self.base_strength = strength
         self.base_knowledge = knowledge
         self.base_sanity = sanity
-        self.death_function = death_function
+        # self.death_function = death_function
+        self.equipment = []
+        self.equipped =[]
+
+    def __init__(self, csvList):
+        self.name = csvList[0]
+        self.base_speed = csvList[1]
+        self.base_strength = csvList[2]
+        self.base_knowledge = csvList[3]
+        self.base_sanity = csvList[4]
+        # self.death_function = death_function
         self.equipment = []
         self.equipped =[]
 

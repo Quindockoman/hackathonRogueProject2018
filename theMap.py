@@ -40,10 +40,13 @@ class Map:
         self.numRooms = numRooms
 
     def insert_player(self, newPlayer, room):
-        room.playerList.append(newPlayer)
+        if(len(room.playerList) > 8):
+            print("too many players in room")
+        else:
+            room.playerList.append(newPlayer)
 
-    def remove_player(self, playerToRemove, room):
-        room.playerList.append(playerToRemove)
+    def remove_player(self, playerToRemove, roomNum):
+        self.roomList[roomNum].playerList.append(playerToRemove)
 
     def insert_item(self, newItem, room):
         room.itemList.append(newItem)
@@ -85,7 +88,7 @@ class Map:
         yStart = 0
         yEnd = 4
         for i in range(1, self.numRooms+1):
-            print(xStart, xEnd, yStart, yEnd)
+            # print(xStart, xEnd, yStart, yEnd)
             newRoom = Room(xStart, xEnd, yStart, yEnd, roomNameList[i-1])
             self.create_room(newRoom)
             self.roomList.append(newRoom)
