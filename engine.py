@@ -39,7 +39,35 @@ def render_all(mapToUse, con):
     for y in range(GAME_HEIGHT):
         for x in range(GAME_WIDTH):
             if(mapToUse.map[x][y].charToken != ""):
-                tcod.console_put_char(con, x, y, mapToUse.map[x][y].charToken, tcod.BKGND_NONE)
+                newCharCode = 0
+                # print(mapToUse.map[x][y].charToken)
+                if(mapToUse.map[x][y].charToken == "S"):
+                    newCharCode = 263
+                if(mapToUse.map[x][y].charToken == "N"):
+                    newCharCode = 264
+                if(mapToUse.map[x][y].charToken == "E"):
+                    newCharCode = 265
+                if(mapToUse.map[x][y].charToken == "W"):
+                    newCharCode = 266
+                if(mapToUse.map[x][y].charToken == "<"):
+                    newCharCode = 267
+                if(mapToUse.map[x][y].charToken == ">"):
+                    newCharCode = 268
+                if(mapToUse.map[x][y].charToken == "/"):
+                    newCharCode = 269
+                if(mapToUse.map[x][y].charToken == "\\"):
+                    newCharCode = 270
+                if(mapToUse.map[x][y].charToken == "."):
+                    newCharCode = 271
+                if(mapToUse.map[x][y].charToken == "w"):
+                    newCharCode = 272
+                if(mapToUse.map[x][y].charToken == "s"):
+                    newCharCode = 273
+                if(mapToUse.map[x][y].charToken == "n"):
+                    newCharCode = 274
+                if(mapToUse.map[x][y].charToken == "e"):
+                    newCharCode = 275
+                tcod.console_put_char_ex(con, x, y, newCharCode, tcod.white, tcod.black)
                 # else:
                 #      tcod.console_put_char(con, x, y, "#", tcod.BKGND_NONE)
     for roomIndex in mapToUse.roomList:
@@ -49,9 +77,25 @@ def render_all(mapToUse, con):
         placeX = roomIndex.x1
         placeY = roomIndex.y1
         for i in range(0, len(roomIndex.playerList)):
+            newCharCode = 0
+            if(roomIndex.playerList[i].playerNum == 0):
+                newCharCode = 256
+            if(roomIndex.playerList[i].playerNum == 1):
+                newCharCode = 257
+            if(roomIndex.playerList[i].playerNum == 2):
+                newCharCode = 258
+            if(roomIndex.playerList[i].playerNum == 3):
+                newCharCode = 259
+            if(roomIndex.playerList[i].playerNum == 4):
+                newCharCode = 260
+            if(roomIndex.playerList[i].playerNum == 5):
+                newCharCode = 261
+            if(roomIndex.playerList[i].playerNum == 6):
+                newCharCode = 262
+            # print(roomIndex.playerList[i].playerNum)
             # print(roomIndex.playerList[i].name[0])
             # print(placeX+1, placeY+1)
-            tcod.console_put_char(con, placeX+1, placeY+1, roomIndex.playerList[i].name[0], tcod.BKGND_NONE)
+            tcod.console_put_char_ex(con, placeX+1, placeY+1, newCharCode, tcod.white, tcod.black)
             if(placeX < roomIndex.x2-2):
                 placeX += 1
             else:
@@ -94,13 +138,27 @@ def handle_keys(currPlayer, mapToUse):
         mapToUse.movePlayer(currPlayer, 1)
         fov_recompute = True
 
+
+
+def load_customfont():
+    print("did not crash")
+    #The index of the first custom tile in the file
+    a = 256
+
+    #The "y" is the row index, here we load the sixth row in the font file. Increase the "6" to load any new rows from the file
+    for y in range(6,7):
+        tcod.console_map_ascii_codes_to_font(a, 32, 0, y)
+        a += 32
+
 def main():
     # player_x = int(screen_width / 2)
     # player_y = int(screen_height / 2)
 
-    tcod.console_set_custom_font('arial10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
-
-    tcod.console_init_root(GAME_WIDTH, GAME_HEIGHT, 'tcod tutorial revised', False)
+    # tcod.console_set_custom_font('arial10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
+    tcod.console_set_custom_font('hontfont.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD, 32, 10)
+    # load_customfont()
+    print("here")
+    tcod.console_init_root(GAME_WIDTH, GAME_HEIGHT, 'tcod tutorial revised', True)
     con = tcod.console_new(GAME_WIDTH, GAME_HEIGHT)
 
     key = tcod.Key()
@@ -145,7 +203,7 @@ def main():
     while not tcod.console_is_window_closed():
         # tcod.sys_check_for_event(tcod.EVENT_KEY_PRESS, key, mouse)
 
-        tcod.console_set_default_foreground(0, tcod.white)
+        # tcod.console_set_default_foreground(0, tcod.white)
         render_all(gameMap, con)
 
         tcod.console_flush()
@@ -159,7 +217,7 @@ def main():
 
         # print(playersToTakeTurn)
         for p in playersToTakeTurn:
-            print(p.name)
+            print(p.name + "'s  turn")
             handle_keys(p, gameMap)
             # render_all(gameMap, con)
 

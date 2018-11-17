@@ -1,9 +1,8 @@
 # Character Class
 
-
 class player:
     # combat-related properties and methods (monster, player, NPC).
-    def __init__(self, name, speed, strength, knowledge, sanity, death_function=None):
+    def __init__(self, name, speed, strength, knowledge, sanity, playerNum, death_function=None):
         self.name = name
         self.base_speed = speed
         self.base_strength = strength
@@ -12,6 +11,7 @@ class player:
         # self.death_function = death_function
         self.equipment = []
         self.equipped =[]
+        self.playerNum = playerNum
 
     def __init__(self, csvList):
         self.name = csvList[0]
@@ -22,6 +22,7 @@ class player:
         # self.death_function = death_function
         self.equipment = []
         self.equipped =[]
+        self.playerNum = csvList[5]
 
     @property
     def strength(self):  # return actual strength, by summing up the bonuses from all equipped items
