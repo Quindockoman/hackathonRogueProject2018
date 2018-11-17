@@ -2,13 +2,12 @@
 
 
 class item:
-    def __init__(self, status, stat, bonus, name, description, event):
+    def __init__(self, status, stat, bonus, name, description):
         self.status = status
         self.stat = stat
         self.bonus = bonus
         self.name = name
         self.description = description
-        self.event = event
 
     def get_status(self):
         return self.status
@@ -25,8 +24,7 @@ class item:
     def get_description(self):
         return self.description
 
-    def get_event(self):
-        return self.event
+
 
 
 
