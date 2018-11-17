@@ -55,6 +55,15 @@ class player:
                 bonus += item.bonus
         return self.base_sanity + bonus
 
+    def dumpStats(self):
+        print(self.name)
+        print(self.base_speed)
+        print(self.base_strength)
+        print(self.base_knowledge)
+        print(self.base_sanity)
+        print(self.equipment)
+        print(self.equipped)
+
     def attack(self, target):
         # a simple formula for attack damage
         damage = self.strength - target.fighter.defense
@@ -68,7 +77,7 @@ class player:
 
     def pickup(self, item): # Takes items and adds it to the equipment list
         self.equipment.append(item)
-        if(item.status() == "passive"):
+        if(item.status == "passive"):
             self.equipped.append(item)
 
     def equip(self): # Should return a list of active items, that currently affect stats
