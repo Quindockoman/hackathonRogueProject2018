@@ -1,5 +1,8 @@
 import tcod
 from theMap import *
+from Item import *
+from Monster import *
+from Event import *
 
 color_dark_wall = tcod.Color(0, 0, 100)
 color_dark_ground = tcod.Color(50, 50, 150)
@@ -37,7 +40,7 @@ def main():
     key = tcod.Key()
     mouse = tcod.Mouse()
 
-    gameMap = Map(GAME_WIDTH, GAME_HEIGHT, 81)
+    gameMap = Map(GAME_WIDTH, GAME_HEIGHT, 9)
     gameMap.make_map()
 
     while not tcod.console_is_window_closed():

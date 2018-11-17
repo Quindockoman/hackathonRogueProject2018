@@ -58,7 +58,7 @@ class player:
 
     def pickup(self, item): # Takes items and adds it to the equipment list
         self.equipment.append(item)
-        if item.status() = "passive":
+        if(item.status() == "passive"):
             self.equipped.append(item)
 
     def equip(self): # Should return a list of active items, that currently affect stats
@@ -81,7 +81,7 @@ class player:
 
     def destroy(self):
         for item in self.equipped:
-            if item.status == "active"
+            if(item.status == "active"):
                 self.equipped.remove(item)
 
     def get_stat(self, stat):
@@ -93,7 +93,7 @@ class player:
             return self.knowledge()
         if stat == "sanity":
             return self.sanity()
-        
+
     def damage_stat(self, stat, power):
         if stat == "strength":
             self.base_strength = self.base_strength - power
@@ -103,6 +103,3 @@ class player:
             self.base_knowledge = self.base_knowledge - power
         if stat == "sanity":
             self.base_sanity = self.base_sanity - power
-         
-            
-
