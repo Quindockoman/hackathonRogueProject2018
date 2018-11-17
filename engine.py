@@ -32,42 +32,57 @@ def render_all(mapToUse, con):
     global color_light_wall
     global color_light_ground
 
-    for y in range(GAME_HEIGHT):
-        for x in range(GAME_WIDTH):
-            tcod.console_put_char(con, x, y, " ", tcod.BKGND_NONE)
+    # for y in range(GAME_HEIGHT):
+    #     for x in range(GAME_WIDTH):
+    #         tcod.console_put_char(con, x, y, " ", tcod.BKGND_NONE)
 
     for y in range(GAME_HEIGHT):
         for x in range(GAME_WIDTH):
             if(mapToUse.map[x][y].charToken != ""):
-                newCharCode = 160 + 7
+                # newCharCode = 7
+                img = None
                 # print(mapToUse.map[x][y].charToken)
                 if(mapToUse.map[x][y].charToken == "S"):
-                    newCharCode += 1
+                    # newCharCode += 1
+                    img = tcod.image_load("LargeWallS.png")
                 if(mapToUse.map[x][y].charToken == "N"):
-                    newCharCode += 2
+                    # newCharCode += 2
+                    img = tcod.image_load("LargeWallN.png")
                 if(mapToUse.map[x][y].charToken == "E"):
-                    newCharCode += 3
+                    # newCharCode += 3
+                    img = tcod.image_load("largeWallE.png")
                 if(mapToUse.map[x][y].charToken == "W"):
-                    newCharCode += 4
+                    # newCharCode += 4
+                    img = tcod.image_load("largeWallW.png")
                 if(mapToUse.map[x][y].charToken == "<"):
-                    newCharCode += 5
+                    # newCharCode += 5
+                    img = tcod.image_load("LargeSW.png")
                 if(mapToUse.map[x][y].charToken == ">"):
-                    newCharCode += 6
+                    # newCharCode += 6
+                    img = tcod.image_load("LargeSE.png")
                 if(mapToUse.map[x][y].charToken == "/"):
-                    newCharCode += 7
+                    # newCharCode += 7
+                    img = tcod.image_load("LargeNW.png")
                 if(mapToUse.map[x][y].charToken == "\\"):
-                    newCharCode += 8
+                    # newCharCode += 8
+                    img = tcod.image_load("LargeNE.png")
                 if(mapToUse.map[x][y].charToken == "."):
-                    newCharCode += 9
+                    # newCharCode += 9
+                    img = tcod.image_load("LargeFloor.png")
                 if(mapToUse.map[x][y].charToken == "w"):
-                    newCharCode += 10
+                    # newCharCode += 10
+                    img = tcod.image_load("DoorW.png")
                 if(mapToUse.map[x][y].charToken == "s"):
-                    newCharCode += 11
+                    # newCharCode += 11
+                    img = tcod.image_load("DoorS.png")
                 if(mapToUse.map[x][y].charToken == "n"):
-                    newCharCode += 12
+                    # newCharCode += 12
+                    img = tcod.image_load("DoorN.png")
                 if(mapToUse.map[x][y].charToken == "e"):
-                    newCharCode += 13
-                tcod.console_put_char_ex(con, x, y, newCharCode, tcod.white, tcod.black)
+                    # newCharCode += 13
+                    img = tcod.image_load("DoorE.png")
+                # tcod.console_put_char_ex(con, x, y, newCharCode, tcod.white, tcod.black)
+                tcod.image_blit_rect(img, con, x, y, 64, 64, tcod.BKGND_NONE)
                 # else:
                 #      tcod.console_put_char(con, x, y, "#", tcod.BKGND_NONE)
     for roomIndex in mapToUse.roomList:
@@ -77,27 +92,35 @@ def render_all(mapToUse, con):
         placeX = roomIndex.x1
         placeY = roomIndex.y1
         for i in range(0, len(roomIndex.playerList)):
-            newCharCode = 160
-            if(roomIndex.playerList[i].playerNum == 0):
-                newCharCode += 1
-            if(roomIndex.playerList[i].playerNum == 2):
-                newCharCode += 2
-            if(roomIndex.playerList[i].playerNum == 2):
-                newCharCode += 3
-            if(roomIndex.playerList[i].playerNum == 3):
-                newCharCode += 4
-            if(roomIndex.playerList[i].playerNum == 4):
-                newCharCode += 5
-            if(roomIndex.playerList[i].playerNum == 5):
-                newCharCode += 6
-            if(roomIndex.playerList[i].playerNum == 6):
-                newCharCode += 7
+            # newCharCode = -1
+            img = None
+            if(roomIndex.playerList[i].playerNum == "0"):
+                print("got here")
+                img = tcod.image_load("isaiah.png")
+                # newCharCode += 1
+            if(roomIndex.playerList[i].playerNum == "1"):
+                # newCharCode += 3
+                img = tcod.image_load("dave.png")
+            if(roomIndex.playerList[i].playerNum == "2"):
+                # newCharCode += 4
+                img = tcod.image_load("ian.png")
+            if(roomIndex.playerList[i].playerNum == "3"):
+                # newCharCode += 5
+                img = tcod.image_load("richard.png")
+            if(roomIndex.playerList[i].playerNum == "4"):
+                # newCharCode += 6
+                img = tcod.image_load("josh.png")
+            if(roomIndex.playerList[i].playerNum == "5"):
+                # newCharCode += 7
+                img = tcod.image_load("dylan.png")
+            if(roomIndex.playerList[i].playerNum == "6"):
+                # newCharCode += 8
+                img = tcod.image_load("will.png")
             # print(roomIndex.playerList[i].playerNum)
             # print(roomIndex.playerList[i].name[0])
             # print(placeX+1, placeY+1)
-            #tcod.console_put_char_ex(con, placeX+1, placeY+1, chr(newCharCode), tcod.white, tcod.black)
-            tcod.console_put_char_ex(con, placeX+1, placeY+1, chr(newCharCode), tcod.white, tcod.black)
-
+            # tcod.console_put_char_ex(con, placeX+1, placeY+1, newCharCode, tcod.white, tcod.black)
+            tcod.image_blit_rect(img, con, placeX, placeY, 64, 64, tcod.BKGND_SET)
             if(placeX < roomIndex.x2-2):
                 placeX += 1
             else:

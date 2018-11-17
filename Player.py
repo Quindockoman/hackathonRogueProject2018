@@ -4,14 +4,14 @@ class player:
     # combat-related properties and methods (monster, player, NPC).
     def __init__(self, name, speed, strength, knowledge, sanity, playerNum, death_function=None):
         self.name = name
-        self.base_speed = speed
-        self.base_strength = strength
-        self.base_knowledge = knowledge
-        self.base_sanity = sanity
+        self.base_speed = int(speed)
+        self.base_strength = int(strength)
+        self.base_knowledge = int(knowledge)
+        self.base_sanity = int(sanity)
         # self.death_function = death_function
         self.equipment = []
         self.equipped =[]
-        self.playerNum = playerNum
+        self.playerNum = int(playerNum)
 
     def __init__(self, csvList):
         self.name = csvList[0]
