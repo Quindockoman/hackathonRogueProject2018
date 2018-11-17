@@ -39,13 +39,13 @@ class Map:
         self.maxWidth = maxWidth
         self.numRooms = numRooms
 
-    def insert_player(newPlayer, room):
+    def insert_player(self, newPlayer, room):
         room.playerList.append(newPlayer)
 
-    def remove_player(playerToRemove, room):
+    def remove_player(self, playerToRemove, room):
         room.playerList.append(playerToRemove)
 
-    def insert_item(newItem, room):
+    def insert_item(self, newItem, room):
         room.itemList.append(newItem)
 
     def create_room(self, room):

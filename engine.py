@@ -16,10 +16,7 @@ itemList = []
 with open('items.csv','r') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     for row in readCSV:
-        newItemList = []
-        for index in row:
-            newItemList.append(row[index])
-        itemList.append(newItemList)
+        itemList.append(row)
 print(itemList)
 
 def render_all(mapToUse, con):
@@ -56,6 +53,12 @@ def main():
     gameMap.make_map()
     for i in range(0, len(gameMap.roomList)):
         print(gameMap.roomList[i])
+
+    newItem = item(itemList[0])
+    gameMap.insert_item(newItem, gameMap.roomList[0])
+    print(gameMap.roomList[0].itemList)
+
+    
 
     while not tcod.console_is_window_closed():
         # tcod.sys_check_for_event(tcod.EVENT_KEY_PRESS, key, mouse)
