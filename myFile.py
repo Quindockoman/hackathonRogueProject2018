@@ -1,3 +1,0 @@
-
-myFunc():
-  print("it worked")

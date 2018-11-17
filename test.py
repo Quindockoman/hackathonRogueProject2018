@@ -1,3 +1,0 @@
-from myFile import *
-
-myFunc()
