@@ -39,11 +39,11 @@ class Map:
         self.maxWidth = maxWidth
         self.numRooms = numRooms
 
-    def insert_player(self, newPlayer, room):
-        if(len(room.playerList) > 8):
+    def insert_player(self, newPlayer, roomNum):
+        if(len(self.roomList[roomNum].playerList) > 8):
             print("too many players in room")
         else:
-            room.playerList.append(newPlayer)
+            self.roomList[roomNum].playerList.append(newPlayer)
 
     def remove_player(self, playerToRemove, roomNum):
         self.roomList[roomNum].playerList.append(playerToRemove)
