@@ -1,8 +1,10 @@
 # Character Class
 
+
 class player:
     # combat-related properties and methods (monster, player, NPC).
-    def __init__(self, speed, strength, knowledge, sanity, death_function=None):
+    def __init__(self, speed, strength, knowledge, sanity, name, death_function=None):
+        self.name = name
         self.base_speed = speed
         self.base_strength = strength
         self.base_knowledge = knowledge
@@ -15,7 +17,7 @@ class player:
     def strength(self):  # return actual strength, by summing up the bonuses from all equipped items
         bonus = 0
         for item in self.equipped:
-            if item.type == strength:
+            if item.stat == "strength":
                 bonus += item.bonus
         return self.base_strength + bonus
 
@@ -23,7 +25,7 @@ class player:
     def speed(self):  # return actual speed, by summing up the bonuses from all equipped items
         bonus = 0
         for item in self.equipped:
-            if item.type == speed:
+            if item.stat == "speed":
                 bonus += item.bonus
         return self.base_speed + bonus
 
@@ -31,7 +33,7 @@ class player:
     def knowledge(self):  # return actual knowledge, by summing up the bonuses from all equipped items
         bonus = 0
         for item in self.equipped:
-            if item.type == knowledge:
+            if item.stat == "knowledge":
                 bonus += item.bonus
         return self.base_knowledge + bonus
 
@@ -39,7 +41,7 @@ class player:
     def sanity(self):  # return actual sanity, by summing up the bonuses from all equipped items
         bonus = 0
         for item in self.equipped:
-            if item.type == sanity:
+            if item.stat == "sanity":
                 bonus += item.bonus
         return self.base_sanity + bonus
 
@@ -56,7 +58,7 @@ class player:
 
     def pickup(self, item): # Takes items and adds it to the equipment list
         self.equipment.append(item)
-        if item.status() = passive:
+        if item.status() = "passive":
             self.equipped.append(item)
 
     def equip(self): # Should return a list of active items, that currently affect stats
@@ -66,7 +68,7 @@ class player:
         count = 0
         option = []
         for item in self.equipment:
-            if item.status == active:
+            if item.status == "active":
                 print(count, ". ", item.name, '/n')
                 option.append(item)
                 self.equipped.remove(item)
@@ -79,6 +81,28 @@ class player:
 
     def destroy(self):
         for item in self.equipped:
-            if item.status == active
+            if item.status == "active"
                 self.equipped.remove(item)
+
+    def get_stat(self, stat):
+        if stat == "strength":
+            return self.strength()
+        if stat == "speed":
+            return self.speed()
+        if stat == "knowledge":
+            return self.knowledge()
+        if stat == "sanity":
+            return self.sanity()
+        
+    def damage_stat(self, stat, power):
+        if stat == "strength":
+            self.base_strength = self.base_strength - power
+        if stat == "speed":
+            self.base_speed = self.base_speed - power
+        if stat == "knowledge":
+            self.base_knowledge = self.base_knowledge - power
+        if stat == "sanity":
+            self.base_sanity = self.base_sanity - power
+         
+            
 

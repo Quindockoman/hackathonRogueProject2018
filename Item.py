@@ -1,9 +1,10 @@
 # Item Class
 
+
 class item:
-    def __init__(self, status, type, bonus, name, description, event, omen):
+    def __init__(self, status, stat, bonus, name, description, event, omen):
         self.status = status
-        self.type = type
+        self.stat = stat
         self.bonus = bonus
         self.name = name
         self.description = description
