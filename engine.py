@@ -39,34 +39,34 @@ def render_all(mapToUse, con):
     for y in range(GAME_HEIGHT):
         for x in range(GAME_WIDTH):
             if(mapToUse.map[x][y].charToken != ""):
-                newCharCode = 0
+                newCharCode = 7
                 # print(mapToUse.map[x][y].charToken)
                 if(mapToUse.map[x][y].charToken == "S"):
-                    newCharCode = 263
+                    newCharCode += 1
                 if(mapToUse.map[x][y].charToken == "N"):
-                    newCharCode = 264
+                    newCharCode += 2
                 if(mapToUse.map[x][y].charToken == "E"):
-                    newCharCode = 265
+                    newCharCode += 3
                 if(mapToUse.map[x][y].charToken == "W"):
-                    newCharCode = 266
+                    newCharCode += 4
                 if(mapToUse.map[x][y].charToken == "<"):
-                    newCharCode = 267
+                    newCharCode += 5
                 if(mapToUse.map[x][y].charToken == ">"):
-                    newCharCode = 268
+                    newCharCode += 6
                 if(mapToUse.map[x][y].charToken == "/"):
-                    newCharCode = 269
+                    newCharCode += 7
                 if(mapToUse.map[x][y].charToken == "\\"):
-                    newCharCode = 270
+                    newCharCode += 8
                 if(mapToUse.map[x][y].charToken == "."):
-                    newCharCode = 271
+                    newCharCode += 9
                 if(mapToUse.map[x][y].charToken == "w"):
-                    newCharCode = 272
+                    newCharCode += 10
                 if(mapToUse.map[x][y].charToken == "s"):
-                    newCharCode = 273
+                    newCharCode += 11
                 if(mapToUse.map[x][y].charToken == "n"):
-                    newCharCode = 274
+                    newCharCode += 12
                 if(mapToUse.map[x][y].charToken == "e"):
-                    newCharCode = 275
+                    newCharCode += 13
                 tcod.console_put_char_ex(con, x, y, newCharCode, tcod.white, tcod.black)
                 # else:
                 #      tcod.console_put_char(con, x, y, "#", tcod.BKGND_NONE)
@@ -77,21 +77,21 @@ def render_all(mapToUse, con):
         placeX = roomIndex.x1
         placeY = roomIndex.y1
         for i in range(0, len(roomIndex.playerList)):
-            newCharCode = 0
+            newCharCode = -1
             if(roomIndex.playerList[i].playerNum == 0):
-                newCharCode = 256
-            if(roomIndex.playerList[i].playerNum == 1):
-                newCharCode = 257
+                newCharCode += 1
             if(roomIndex.playerList[i].playerNum == 2):
-                newCharCode = 258
+                newCharCode += 3
+            if(roomIndex.playerList[i].playerNum == 2):
+                newCharCode += 4
             if(roomIndex.playerList[i].playerNum == 3):
-                newCharCode = 259
+                newCharCode += 5
             if(roomIndex.playerList[i].playerNum == 4):
-                newCharCode = 260
+                newCharCode += 6
             if(roomIndex.playerList[i].playerNum == 5):
-                newCharCode = 261
+                newCharCode += 7
             if(roomIndex.playerList[i].playerNum == 6):
-                newCharCode = 262
+                newCharCode += 8
             # print(roomIndex.playerList[i].playerNum)
             # print(roomIndex.playerList[i].name[0])
             # print(placeX+1, placeY+1)
@@ -143,7 +143,7 @@ def handle_keys(currPlayer, mapToUse):
 def load_customfont():
     print("did not crash")
     #The index of the first custom tile in the file
-    a = 256
+    a = 0
 
     #The "y" is the row index, here we load the sixth row in the font file. Increase the "6" to load any new rows from the file
     for y in range(6, 7):
@@ -155,8 +155,8 @@ def main():
     # player_y = int(screen_height / 2)
 
     # tcod.console_set_custom_font('arial10x10.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD)
-    tcod.console_set_custom_font('hontfont.png', tcod.FONT_TYPE_GREYSCALE | tcod.FONT_LAYOUT_TCOD, 32, 10)
-    # load_customfont()
+    tcod.console_set_custom_font('hontfont.png', tcod.FONT_TYPE_GRAYSCALE | tcod.FONT_LAYOUT_TCOD, 32, 10)
+    load_customfont()
     print("here")
     tcod.console_init_root(GAME_WIDTH, GAME_HEIGHT, 'tcod tutorial revised', False)
     con = tcod.console_new(GAME_WIDTH, GAME_HEIGHT)
